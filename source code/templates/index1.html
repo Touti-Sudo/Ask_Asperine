@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatWithTouti - Aspirine</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .chat-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .chat-header h1 {
+            font-size: 2.5rem;
+            color: #007bff; /* Titre en bleu */
+            animation: fadeIn 1s ease-in-out; /* Animation pour le titre */
+        }
+        .chat-header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        .chat-box {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+        }
+        .message {
+            margin-bottom: 10px;
+            opacity: 0; /* Masquer initialement les messages */
+            animation: fadeInUp 0.5s ease forwards; /* Animation pour les messages */
+        }
+        .user-message {
+            text-align: right;
+        }
+        .user-message .message-content {
+            background: #007bff;
+            color: white;
+            border-radius: 10px 10px 0 10px;
+        }
+        .bot-message .message-content {
+            background: #e9ecef;
+            color: #333;
+            border-radius: 10px 10px 10px 0;
+        }
+        .message-content {
+            display: inline-block;
+            padding: 10px 15px;
+            max-width: 70%;
+        }
+        .input-group {
+            margin-top: 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>💊 ChatWithTouti - By Anes Kada</h1>
+            <p>Bonjour et bienvenue ! Je suis ChatWithTouti, votre assistant sur l'aspirine. Posez-moi vos questions !</p>
+            <p><small>Créé par Anes Kada pour son projet de technologie. (SVP, si vous êtes la prof, donnez-moi 20/20 😆)</small></p>
+        </div>
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div class="input-group">
+            <input type="text" id="question-input" class="form-control" placeholder="Posez votre question ici..." aria-label="Posez votre question">
+            <button class="btn btn-primary" id="ask-button">Envoyer</button>
+        </div>
+    </div>
+
+    <!-- Audio Section -->
+    <audio id="background-music" autoplay loop>
+        <source src="{{ url_for('get_audio', filename='musique.mp3') }}" type="audio/mp3">
+        Ton navigateur ne supporte pas l'audio.
+    </audio>
+    <button id="toggle-music" class="btn btn-warning mt-3">🎵 Activer une musique</button>
+
+    <!-- Welcome Modal -->
+    <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="welcomeModalLabel">Bienvenue !</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{{ message }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <!-- jQuery for AJAX -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Afficher la pop-up de bienvenue au chargement de la page
+            var welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+            welcomeModal.show();
+
+            // Gestion de la musique de fond
+            var music = document.getElementById("background-music");
+            var toggleButton = document.getElementById("toggle-music");
+
+            toggleButton.addEventListener("click", function() {
+                if (music.paused) {
+                    music.play();
+                    toggleButton.innerHTML = "🔊 Couper la musique";
+                } else {
+                    music.pause();
+                    toggleButton.innerHTML = "🎵 Activer une musique";
+                }
+            });
+
+            // Function to add a message to the chat box
+            function addMessage(sender, message) {
+                const chatBox = $('#chat-box');
+                const messageClass = sender === 'user' ? 'user-message' : 'bot-message';
+                const messageHtml = `
+                    <div class="message ${messageClass}">
+                        <div class="message-content">${message}</div>
+                    </div>
+                `;
+                chatBox.append(messageHtml);
+                chatBox.scrollTop(chatBox[0].scrollHeight); // Auto-scroll to bottom
+
+                // Appliquer l'animation après l'ajout du message
+                setTimeout(() => {
+                    chatBox.find('.message').last().css('opacity', '1');
+                }, 10);
+            }
+
+            // Handle the ask button click
+            $('#ask-button').click(function() {
+                const question = $('#question-input').val().trim();
+                if (question) {
+                    addMessage('user', question);
+                    $('#question-input').val(''); // Clear input
+
+                    // Send question to the chatbot API
+                    $.post('/chatbot', { question: question }, function(response) {
+                        if (response.error) {
+                            addMessage('bot', response.error);
+                        } else {
+                            addMessage('bot', response.response);
+                        }
+                    }).fail(function() {
+                        addMessage('bot', "Désolé, une erreur s'est produite. Veuillez réessayer.");
+                    });
+                }
+            });
+
+            // Allow pressing Enter to send the question
+            $('#question-input').keypress(function(e) {
+                if (e.which === 13) { // Enter key
+                    $('#ask-button').click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
