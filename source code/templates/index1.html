@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatWithTouti - Aspirine</title>
+    <title>Ask_Asperine-Ar</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #6ab5ff;
+            padding: 20px;
+        }
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
         }
         .chat-container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
             background: white;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
         }
         .chat-header {
             text-align: center;
@@ -24,8 +28,8 @@
         }
         .chat-header h1 {
             font-size: 2.5rem;
-            color: #007bff; /* Titre en bleu */
-            animation: fadeIn 1s ease-in-out; /* Animation pour le titre */
+            color: #007bff; /* اللون الأزرق للعنوان */
+            animation: fadeIn 1s ease-in-out; /* رسوم متحركة للعنوان */
         }
         .chat-header p {
             font-size: 1.1rem;
@@ -42,11 +46,11 @@
         }
         .message {
             margin-bottom: 10px;
-            opacity: 0; /* Masquer initialement les messages */
-            animation: fadeInUp 0.5s ease forwards; /* Animation pour les messages */
+            opacity: 0; /* إخفاء الرسائل في البداية */
+            animation: fadeInUp 0.5s ease forwards; /* رسوم متحركة للرسائل */
         }
         .user-message {
-            text-align: right;
+            text-align: left;
         }
         .user-message .message-content {
             background: #007bff;
@@ -66,8 +70,35 @@
         .input-group {
             margin-top: 20px;
         }
+        .questions-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .table thead th {
+            background-color: #007bff;
+            color: white;
+        }
+        .btn-copy {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-copy:hover {
+            background-color: #218838;
+        }
+        #toggle-music {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
 
-        /* Animations */
+        /* الرسوم المتحركة */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -92,72 +123,141 @@
     </style>
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-header">
-            <h1>💊 ChatWithTouti - By Anes Kada</h1>
-            <p>Bonjour et bienvenue ! Je suis ChatWithTouti, votre assistant sur l'aspirine. Posez-moi vos questions !</p>
-            <p><small>Créé par Anes Kada pour son projet de technologie. (SVP, si vous êtes la prof, donnez-moi 20/20 😆)</small></p>
+    <div class="main-container">
+        <!-- حاوية الدردشة -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <h1>💊 Ask_Asperine-Ar - بِسْمِ أَنَسْ قَادَةْ</h1>
+                <p>مرحبًا بكم! أنا Ask_Asperine-Ar، مساعدكم الخاص حول الأسبرين. اطرحوا عليّ أسئلتكم!</p>
+                <p><small>تم إنشاؤه بواسطة أنس قادة لمشروعه التكنولوجي. (من فضلك إذا كنت الأستاذة، أعطني 20/20 😆)</small></p>
+            </div>
+
+            <!-- صندوق الدردشة -->
+            <div class="chat-box" id="chat-box">
+                <!-- ستظهر الرسائل هنا -->
+            </div>
+            <div class="input-group">
+                <input type="text" id="question-input" class="form-control" placeholder="اطرح سؤالك هنا..." aria-label="اطرح سؤالك">
+                <button class="btn btn-primary" id="ask-button">إرسال</button>
+            </div>
         </div>
-        <div class="chat-box" id="chat-box">
-            <!-- Chat messages will appear here -->
-        </div>
-        <div class="input-group">
-            <input type="text" id="question-input" class="form-control" placeholder="Posez votre question ici..." aria-label="Posez votre question">
-            <button class="btn btn-primary" id="ask-button">Envoyer</button>
+
+        <!-- حاوية الأسئلة الشائعة -->
+        <div class="questions-container">
+            <h2 class="text-center mb-3">الأسئلة الشائعة</h2>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>السؤال</th>
+                        <th>الإجراء</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- من أنت؟ -->
+                    <tr>
+                        <td>من أنت؟</td>
+                        <td><button class="btn-copy" onclick="copyToClipboard(this)">نسخ</button></td>
+                    </tr>
+                    <!-- ما هو الأسبرين؟ -->
+                    <tr>
+                        <td>ما هو الأسبرين؟</td>
+                        <td><button class="btn-copy" onclick="copyToClipboard(this)">نسخ</button></td>
+                    </tr>
+                    <!-- ما هي آثاره الجانبية؟ -->
+                    <tr>
+                        <td>ما هي آثاره الجانبية؟</td>
+                        <td><button class="btn-copy" onclick="copyToClipboard(this)">نسخ</button></td>
+                    </tr>
+                    <!-- من قام بإنشائه، ومتى؟ -->
+                    <tr>
+                        <td>من قام بإنشائه، ومتى؟</td>
+                        <td><button class="btn-copy" onclick="copyToClipboard(this)">نسخ</button></td>
+                    </tr>
+                    <!-- ما هي استخداماته القديمة؟ -->
+                    <tr>
+                        <td>ما هي استخداماته القديمة؟</td>
+                        <td><button class="btn-copy" onclick="copyToClipboard(this)">نسخ</button></td>
+                    </tr>
+                    <!-- ما هي استخداماته الحديثة؟ -->
+                    <tr>
+                        <td>ما هي استخداماته الحديثة؟</td>
+                        <td><button class="btn-copy" onclick="copyToClipboard(this)">نسخ</button></td>
+                    </tr>
+                    <!-- كيف يتم تحضيره؟ -->
+                    <tr>
+                        <td>كيف يتم تحضيره؟</td>
+                        <td><button class="btn-copy" onclick="copyToClipboard(this)">نسخ</button></td>
+                    </tr>
+                    <!-- ما هي طريقة تصنيعه الكيميائية؟ -->
+                    <tr>
+                        <td>ما هي طريقة تصنيعه الكيميائية؟</td>
+                        <td><button class="btn-copy" onclick="copyToClipboard(this)">نسخ</button></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <!-- Audio Section -->
+    <!-- قسم الصوت -->
     <audio id="background-music" autoplay loop>
         <source src="{{ url_for('get_audio', filename='musique.mp3') }}" type="audio/mp3">
-        Ton navigateur ne supporte pas l'audio.
+        متصفحك لا يدعم تشغيل الصوت.
     </audio>
-    <button id="toggle-music" class="btn btn-warning mt-3">🎵 Activer une musique</button>
+    <button id="toggle-music" class="btn btn-warning">🎵 تشغيل الموسيقى</button>
 
-    <!-- Welcome Modal -->
+    <!-- نافذة الترحيب -->
     <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="welcomeModalLabel">Bienvenue !</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                    <h5 class="modal-title" id="welcomeModalLabel">مرحبًا!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
                 </div>
                 <div class="modal-body">
                     <p>{{ message }}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">موافق</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-    <!-- jQuery for AJAX -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS والتبعيات -->
+    <script src="static/js/popper.min.js"></script>
+    <script src="static/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery لـ AJAX -->
+    <script src="static/js/jquery-3.6.0.min.js"></script>
     <script>
+        // دالة لنسخ السؤال إلى الحافظة
+        function copyToClipboard(button) {
+            const row = button.closest("tr");
+            const question = row.querySelector("td:nth-child(1)").innerText;
+            navigator.clipboard.writeText(question).then(() => {
+                alert("تم نسخ السؤال: " + question);
+            });
+        }
+
         $(document).ready(function() {
-            // Afficher la pop-up de bienvenue au chargement de la page
+            // عرض نافذة الترحيب عند تحميل الصفحة
             var welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
             welcomeModal.show();
 
-            // Gestion de la musique de fond
+            // إدارة الموسيقى الخلفية
             var music = document.getElementById("background-music");
             var toggleButton = document.getElementById("toggle-music");
 
             toggleButton.addEventListener("click", function() {
                 if (music.paused) {
                     music.play();
-                    toggleButton.innerHTML = "🔊 Couper la musique";
+                    toggleButton.innerHTML = "🔊 إيقاف الموسيقى";
                 } else {
                     music.pause();
-                    toggleButton.innerHTML = "🎵 Activer une musique";
+                    toggleButton.innerHTML = "🎵 تشغيل الموسيقى";
                 }
             });
 
-            // Function to add a message to the chat box
+            // دالة لإضافة رسالة إلى صندوق الدردشة
             function addMessage(sender, message) {
                 const chatBox = $('#chat-box');
                 const messageClass = sender === 'user' ? 'user-message' : 'bot-message';
@@ -167,22 +267,22 @@
                     </div>
                 `;
                 chatBox.append(messageHtml);
-                chatBox.scrollTop(chatBox[0].scrollHeight); // Auto-scroll to bottom
+                chatBox.scrollTop(chatBox[0].scrollHeight); // التمرير التلقائي إلى الأسفل
 
-                // Appliquer l'animation après l'ajout du message
+                // تطبيق الرسوم المتحركة بعد إضافة الرسالة
                 setTimeout(() => {
                     chatBox.find('.message').last().css('opacity', '1');
                 }, 10);
             }
 
-            // Handle the ask button click
+            // التعامل مع النقر على زر الإرسال
             $('#ask-button').click(function() {
                 const question = $('#question-input').val().trim();
                 if (question) {
                     addMessage('user', question);
-                    $('#question-input').val(''); // Clear input
+                    $('#question-input').val(''); // مسح الحقل
 
-                    // Send question to the chatbot API
+                    // إرسال السؤال إلى واجهة برمجة التطبيقات (API) للشات بوت
                     $.post('/chatbot', { question: question }, function(response) {
                         if (response.error) {
                             addMessage('bot', response.error);
@@ -190,14 +290,14 @@
                             addMessage('bot', response.response);
                         }
                     }).fail(function() {
-                        addMessage('bot', "Désolé, une erreur s'est produite. Veuillez réessayer.");
+                        addMessage('bot', "عذرًا، حدث خطأ. يرجى المحاولة مرة أخرى.");
                     });
                 }
             });
 
-            // Allow pressing Enter to send the question
+            // السماح بالضغط على Enter لإرسال السؤال
             $('#question-input').keypress(function(e) {
-                if (e.which === 13) { // Enter key
+                if (e.which === 13) { // مفتاح Enter
                     $('#ask-button').click();
                 }
             });
