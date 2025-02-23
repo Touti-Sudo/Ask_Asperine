@@ -1,5 +1,5 @@
 # 🎤 Ask\_Asperine - Chatbot sur l'Aspirine
-![Ask_Asperine Logo](source code//logo.png)
+![Ask_Asperine Logo](source-code//logo.png)
 ## 📌 Description
 
 Ask\_Asperine est un **chatbot interactif** développé en **Python avec Flask**. Il répond aux questions concernant l'aspirine, incluant son histoire, sa synthèse, ses utilisations (passées et actuelles) et ses effets secondaires.
