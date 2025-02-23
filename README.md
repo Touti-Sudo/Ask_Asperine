@@ -1,8 +1,8 @@
-# 🎤 Chat\_With\_Touti - Chatbot sur l'Aspirine
+# 🎤 Ask\_Asperine - Chatbot sur l'Aspirine
 
 ## 📌 Description
 
-Chat\_With\_Touti est un **chatbot interactif** développé en **Python avec Flask**. Il répond aux questions concernant l'aspirine, incluant son histoire, sa synthèse, ses utilisations (passées et actuelles) et ses effets secondaires.
+Ask\_Asperine est un **chatbot interactif** développé en **Python avec Flask**. Il répond aux questions concernant l'aspirine, incluant son histoire, sa synthèse, ses utilisations (passées et actuelles) et ses effets secondaires.
 
 ✨ **Ce projet inclut :**
 
@@ -15,19 +15,19 @@ Chat\_With\_Touti est un **chatbot interactif** développé en **Python avec Fla
 
 - 🤖 Réponses interactives sur divers aspects de l'aspirine
 - 🔊 Lecture automatique de la musique de fond (le site s'ouvre automatiquement dans le navigateur)
-- 🖼️ Affichage optimisé des réponses (listes, cartes, etc.)
+- 🗄 Affichage optimisé des réponses (listes, cartes, etc.)
 - 📂 Accès à une mini base de données locale
 
 ## 🛠️ Installation et Utilisation
 
-### 1️⃣ Cloner le projet
+### 1️⃣Cloner le projet
 
 ```bash
-git clone https://github.com/Touti-Sudo/Chat_With_Touti.git
-cd Chat_With_Touti
+git clone https://github.com/Touti-Sudo/Ask_Asperine.git
+cd Ask_Asperine
 ```
 
-### 2️⃣ Installer les dépendances (si vous utilisez Python)
+### 2️⃣Installer les dépendances (si vous utilisez Python)
 
 Assurez-vous d'avoir Python installé, puis lancez :
 
@@ -35,26 +35,26 @@ Assurez-vous d'avoir Python installé, puis lancez :
 pip install flask requests
 ```
 
-### 3️⃣ Lancer l'application
+### 3️⃣Lancer l'application
 
-▶️ **Avec Python :**
+🐍 **Avec Python :**
 
 ```bash
-python Chat_With_Touti_Fr.py
+python Ask_Asperine_Fr.py
 ```
 
 🖥️ *Le site s'ouvrira automatiquement dans votre navigateur.*
 
 💾 **Avec le fichier .exe (Windows) :**
 
-1. 📥 Téléchargez **Chat\_With\_Touti.exe**.
+1. 💽 Téléchargez **Ask\_Asperine.exe**.
 2. 🖱️ Double-cliquez dessus pour lancer l'application.
 3. 🌍 Le site s'ouvrira automatiquement dans votre navigateur.
 
 ## 📂 Structure du Projet
 
 ```
-Chat_With_Touti/
+Ask_Asperine/
 │── static/
 │   ├── bootstrap/css/bootstrap.min.css
 │   ├── bootstrap/js/bootstrap.bundle.min.js
@@ -62,12 +62,12 @@ Chat_With_Touti/
 │   ├── audio/musique.mp3
 │── templates/
 │   └── index.html
-│── Chat_With_Touti.py
-│── Chat_With_Touti.exe   # Version exécutable pour Windows
+│── Ask_Asperine.py
+│── Ask_Asperine.exe   # Version exécutable pour Windows
 │── README.md
 ```
 
-## 📜 Licence
+## 🌟 Licence
 
 Ce projet est sous licence **MIT**.
 
@@ -77,11 +77,11 @@ Ce projet est sous licence **MIT**.
 
 ---
 
-# 🎤 شات\_ويت\_توتي - روبوت محادثة حول الأسبرين
+# 🎤 اسك\_أسبرين - روبوت محادثة حول الأسبرين
 
 ## 📌 الوصف
 
-شات\_ويت\_توتي هو **روبوت محادثة تفاعلي** تم تطويره باستخدام **بايثون و Flask**. يجيب على الأسئلة المتعلقة بالأسبرين، بما في ذلك تاريخه، تصنيعه، استخداماته (القديمة والحالية)، وآثاره الجانبية.
+اسك\_أسبرين هو **روبوت محادثة تفاعلي** تم تطويره باستخدام **بايثون و Flask**. يجيب على الأسئلة المتعلقة بالأسبرين، بما في ذلك تاريخه، تصنيعه، استخداماته (القديمة والحالية)، وآثاره الجانبية.
 
 ✨ **يشمل هذا المشروع:**
 
@@ -94,7 +94,7 @@ Ce projet est sous licence **MIT**.
 
 - 🤖 إجابات تفاعلية حول مختلف جوانب الأسبرين
 - 🔊 تشغيل تلقائي للموسيقى الخلفية (يفتح الموقع تلقائيًا في المتصفح)
-- 🖼️ عرض محسن للإجابات (قوائم، بطاقات، إلخ)
+- 🗄 عرض محسن للإجابات (قوائم، بطاقات، إلخ)
 - 📂 الوصول إلى قاعدة بيانات محلية
 
 ## 🛠️ التثبيت والاستخدام
@@ -102,8 +102,8 @@ Ce projet est sous licence **MIT**.
 ### 1️⃣ استنساخ المشروع
 
 ```bash
-git clone https://github.com/Touti-Sudo/Chat_With_Touti.git
-cd Chat_With_Touti
+git clone https://github.com/Touti-Sudo/Ask_Asperine.git
+cd Ask_Asperine
 ```
 
 ### 2️⃣ تثبيت المتطلبات (إذا كنت تستخدم بايثون)
@@ -116,24 +116,24 @@ pip install flask requests
 
 ### 3️⃣ تشغيل التطبيق
 
-▶️ **باستخدام بايثون:**
+🐍 **باستخدام بايثون:**
 
 ```bash
-python Chat_With_Touti_Ar.py
+python Ask_Asperine_Ar.py
 ```
 
 🖥️ *سيفتح الموقع تلقائيًا في المتصفح.*
 
 💾 **باستخدام الملف التنفيذي (.exe) لنظام Windows:**
 
-1. 📥 قم بتنزيل **Chat\_With\_Touti.exe**.
+1. 📥 قم بتنزيل **Ask\_Asperine.exe**.
 2. 🖱️ انقر نقرًا مزدوجًا لبدء التطبيق.
 3. 🌍 سيفتح الموقع تلقائيًا في المتصفح.
 
 ## 📂 هيكل المشروع
 
 ```
-Chat_With_Touti/
+Ask_Asperine/
 │── static/
 │   ├── bootstrap/css/bootstrap.min.css
 │   ├── bootstrap/js/bootstrap.bundle.min.js
@@ -141,8 +141,8 @@ Chat_With_Touti/
 │   ├── audio/music.mp3
 │── templates/
 │   └── index.html
-│── Chat_With_Touti.py
-│── Chat_With_Touti.exe   # الإصدار التنفيذي لنظام Windows
+│── Ask_Asperine.py
+│── Ask_Asperine.exe   # الإصدار التنفيذي لنظام Windows
 │── README.md
 ```
 
