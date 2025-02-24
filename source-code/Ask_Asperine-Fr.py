@@ -144,7 +144,7 @@ def chatbot(question):
     if any(word in question for word in ["merci", "merci beaucoup", "thanks", "thank you"]):
         return "🤖 Je t'en prie ! N'hésite pas à me poser d'autres questions si tu as besoin d'aide. 😊"
 
-    elif any(word in question for word in ["qui es-tu", "présentation","tu es qui", "présente-toi", "que fais-tu", "comment fonctionnes-tu", "chatbot", "qui t'a créé", "programmé","créateur","anes kada","anes","kada","projet","20/20","bonjour"]):
+    elif any(word in question for word in ["qui es-tu","qui es tu", "présentation","tu es qui", "présente-toi", "que fais-tu","que fais tu", "comment fonctionnes-tu","comment fonctionnes tu", "chatbot", "qui t'a créé","qui ta créé","qui ta cree","qui t'a cree", "programmé","créateur","anes kada","anes","kada","projet","20/20","bonjour"]):
         info = "🤖 Bonjour ! Je suis Ask_Asperine, une IA non générative (bot) créée par Anes Kada avec Python pour son projet de technologie. Je suis spécialisée dans les informations sur l'aspirine. Pose-moi une question, et je ferai de mon mieux pour te répondre ! 😊"
         return info
     
@@ -159,7 +159,7 @@ def chatbot(question):
         return info["description"]
     
 
-    elif any(word in question for word in ["histoire","qui la créé", "origine", "quand", "qui a inventé", "qui a découvert"]):
+    elif any(word in question for word in ["histoire","qui la créé","qui la cree", "origine", "quand", "qui a inventé", "qui a découvert"]):
         info = get_aspirin_info("histoire")
         return info["description"]
     
