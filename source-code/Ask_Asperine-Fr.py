@@ -96,7 +96,7 @@ app = Flask(__name__)
 
 def draw_schema():
     try:
-        # Crée un schéma avec matplotlib
+    
         fig, ax = plt.subplots(figsize=(8, 5))
         ax.set_xlim(0, 10)
         ax.set_ylim(0, 5)

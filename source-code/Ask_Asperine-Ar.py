@@ -11,13 +11,12 @@ from PIL import Image, ImageTk
 import time
 import webbrowser
 
-# تأكد من وجود مجلد "static"
+
 if not os.path.exists("static"):
     os.makedirs("static")
 
 app = Flask(__name__)
 
-# بيانات الأسبرين
 aspirin_data = {
     "histoire": {
         "description": "📜 تم تصنيع الأسبرين في عام 1897 من قبل 🧑‍🔬 فيليكس هوفمان في شركة باير. قبل ذلك، كان يتم استخدام 🌿 الساليسين، المستخرج من شجرة الصفصاف، منذ العصور القديمة لعلاج الألم والحمى.",
@@ -94,7 +93,7 @@ def get_aspirin_info(topic):
 
 def draw_schema():
     try:
-        # إنشاء مخطط باستخدام matplotlib
+        
         fig, ax = plt.subplots(figsize=(8, 5))
         ax.set_xlim(0, 10)
         ax.set_ylim(0, 5)
